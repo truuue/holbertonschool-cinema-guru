@@ -1,12 +1,14 @@
 import React from 'react';
-import './dashboard.css';
-import Header from '../../components/navigation/Header';
+import SideBar from '../../components/navigation/SideBar';
+import './Dashboard.css';
 
-const Dashboard = ({ userUsername, setIsLoggedIn }) => {
+const Dashboard = () => {
   return (
     <div className="dashboard">
-      <Header userUsername={userUsername} setIsLoggedIn={setIsLoggedIn} />
-      {/* Ajoutez ici d'autres composants ou éléments du tableau de bord */}
+      <SideBar />
+      <main className="dashboard-content">
+        {/* Contenu principal du tableau de bord */}
+      </main>
     </div>
   );
 };

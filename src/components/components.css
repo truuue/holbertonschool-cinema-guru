@@ -1,0 +1,10 @@
+/* Ajoutez ici les styles CSS nécessaires pour vos composants divers */
+.activity-item {
+  list-style-type: none;
+  margin-bottom: 10px;
+}
+
+.activity-text {
+  font-size: 14px;
+  color: #333;
+}
