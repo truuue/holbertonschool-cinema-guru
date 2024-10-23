@@ -45,22 +45,23 @@ const Authentication = ({ setIsLoggedIn, setUserUsername }) => {
           S'inscrire
         </button>
       </div>
-      {_switch ? (
-        <Login
-          username={username}
-          password={password}
-          setUsername={setUsername}
-          setPassword={setPassword}
-        />
-      ) : (
-        <Register
-          username={username}
-          password={password}
-          setUsername={setUsername}
-          setPassword={setPassword}
-        />
-      )}
-      <form onSubmit={handleSubmit}>{/* ... */}</form>
+      <form onSubmit={handleSubmit}>
+        {_switch ? (
+          <Login
+            username={username}
+            password={password}
+            setUsername={setUsername}
+            setPassword={setPassword}
+          />
+        ) : (
+          <Register
+            username={username}
+            password={password}
+            setUsername={setUsername}
+            setPassword={setPassword}
+          />
+        )}
+      </form>
     </div>
   );
 };
