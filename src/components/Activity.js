@@ -3,9 +3,26 @@ import "./components.css";
 
 const Activity = ({ activity }) => {
   const formatActivityText = activity => {
-    // Implémentez la logique pour formater le texte de l'activité selon le design
-    // Ceci est un exemple simple, ajustez selon vos besoins
-    return `${activity.user} a ${activity.action} ${activity.target}`;
+    const { user, action, target } = activity;
+
+    // Formatage du texte de l'activité
+    let formattedText = `${user} a `;
+
+    switch (action) {
+      case "like":
+        formattedText += `aimé ${target}`;
+        break;
+      case "comment":
+        formattedText += `commenté sur ${target}`;
+        break;
+      case "share":
+        formattedText += `partagé ${target}`;
+        break;
+      default:
+        formattedText += `${action} ${target}`;
+    }
+
+    return formattedText;
   };
 
   return (

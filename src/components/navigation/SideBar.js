@@ -63,9 +63,7 @@ const SideBar = () => {
           ))}
         </ul>
       )}
-      <button onClick={() => setSmall(!small)}>
-        {small ? "Agrandir" : "Réduire"}
-      </button>
+      <button onClick={() => setSmall(!small)}>{small ? "Agrandir" : "Réduire"}</button>
     </nav>
   );
 };

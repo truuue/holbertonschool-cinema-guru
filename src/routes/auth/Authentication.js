@@ -21,11 +21,8 @@ const Authentication = ({ setIsLoggedIn, setUserUsername }) => {
 
       setUserUsername(username);
       setIsLoggedIn(true);
-
-      // Vous pouvez ajouter ici une redirection ou un message de succès
     } catch (error) {
       console.error("Erreur d'authentification:", error);
-      // Gérer l'erreur (par exemple, afficher un message à l'utilisateur)
     }
   };
 

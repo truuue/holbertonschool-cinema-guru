@@ -1,15 +1,43 @@
-import React from "react";
+import React, { useState } from "react";
 import "./auth.css";
 
-const Register = ({ username, password, setUsername, setPassword }) => {
-  const handleSubmit = e => {
+const Register = () => {
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+
+  const handleSubmit = async e => {
     e.preventDefault();
-    // Logique d'inscription à implémenter
-    console.log(`Tentative d'inscription avec: ${username} ${password}`);
+    setError("");
+
+    if (!username || !password) {
+      setError("Veuillez remplir tous les champs");
+      return;
+    }
+
+    try {
+      const response = await fetch("/api/register", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ username, password }),
+      });
+
+      if (response.ok) {
+        console.log("Inscription réussie !");
+      } else {
+        const data = await response.json();
+        setError(data.message || "Erreur lors de l'inscription");
+      }
+    } catch (error) {
+      setError("Erreur de connexion au serveur");
+    }
   };
 
   return (
     <form className="auth-form" onSubmit={handleSubmit}>
+      {error && <p className="error-message">{error}</p>}
       <input
         type="text"
         placeholder="Choisir un nom d'utilisateur"
