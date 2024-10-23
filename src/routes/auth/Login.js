@@ -1,11 +1,11 @@
-import React from 'react';
-import './auth.css';
+import React from "react";
+import "./auth.css";
 
 const Login = ({ username, password, setUsername, setPassword }) => {
-  const handleSubmit = (e) => {
+  const handleSubmit = e => {
     e.preventDefault();
     // Logique de connexion à implémenter
-    console.log('Tentative de connexion avec:', username, password);
+    console.log("Tentative de connexion avec:", username, password);
   };
 
   return (
@@ -14,15 +14,17 @@ const Login = ({ username, password, setUsername, setPassword }) => {
         type="text"
         placeholder="Nom d'utilisateur"
         value={username}
-        onChange={(e) => setUsername(e.target.value)}
+        onChange={e => setUsername(e.target.value)}
       />
       <input
         type="password"
         placeholder="Mot de passe"
         value={password}
-        onChange={(e) => setPassword(e.target.value)}
+        onChange={e => setPassword(e.target.value)}
       />
-      <button type="submit" className="auth-submit">Se connecter</button>
+      <button type="submit" className="auth-submit">
+        Se connecter
+      </button>
     </form>
   );
 };

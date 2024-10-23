@@ -1,35 +1,34 @@
-import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
-import Activity from '../Activity';
-import './navigation.css';
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import Activity from "../Activity";
+import "./navigation.css";
 
 const SideBar = () => {
-  const [selected, setSelected] = useState("home");
-  const [small, setSmall] = useState(true);
+  const [small, setSmall] = useState(false);
   const [activities, setActivities] = useState([]);
   const [showActivities, setShowActivities] = useState(false);
   const navigate = useNavigate();
 
-  const setPage = (pageName) => {
-    setSelected(pageName);
+  const setPage = pageName => {
     switch (pageName) {
       case "Home":
-        navigate('/home');
+        navigate("/home");
         break;
       case "Favorites":
-        navigate('/favorites');
+        navigate("/favorites");
         break;
       case "Watch Later":
-        navigate('/watchlater');
+        navigate("/watchlater");
         break;
       default:
-        navigate('/home');
+        navigate("/home");
     }
   };
 
   useEffect(() => {
-    axios.get('/api/activity')
+    axios
+      .get("/api/activity")
       .then(response => {
         setActivities(response.data);
       })
@@ -39,7 +38,7 @@ const SideBar = () => {
   }, []);
 
   return (
-    <nav className={`sidebar ${small ? 'small' : ''}`}>
+    <nav className={`sidebar ${small ? "small" : ""}`}>
       <ul className="navigation">
         <li onClick={() => setPage("Home")}>
           <i className="icon-home"></i>
@@ -55,7 +54,7 @@ const SideBar = () => {
         </li>
       </ul>
       <button onClick={() => setShowActivities(!showActivities)}>
-        {showActivities ? 'Masquer les activités' : 'Afficher les activités'}
+        {showActivities ? "Masquer les activités" : "Afficher les activités"}
       </button>
       {showActivities && (
         <ul className="activities">
@@ -64,6 +63,9 @@ const SideBar = () => {
           ))}
         </ul>
       )}
+      <button onClick={() => setSmall(!small)}>
+        {small ? "Agrandir" : "Réduire"}
+      </button>
     </nav>
   );
 };

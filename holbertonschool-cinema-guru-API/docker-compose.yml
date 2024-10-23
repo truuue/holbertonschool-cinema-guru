@@ -1,4 +1,4 @@
-version: '3'
+version: "3"
 services:
   node:
     restart: always
@@ -18,9 +18,9 @@ services:
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
-    ports: 
-      - '5432:5432'
+    ports:
+      - "5432:5432"
     volumes:
       - node-db:/var/lib/postgresql/data
 volumes:
- node-db:
+  node-db:

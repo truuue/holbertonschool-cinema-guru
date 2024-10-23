@@ -1,9 +1,9 @@
-import React from 'react';
-import './navigation.css';
+import React from "react";
+import "./navigation.css";
 
 const Header = ({ userUsername, setIsLoggedIn }) => {
   const logout = () => {
-    localStorage.removeItem('accessToken');
+    localStorage.removeItem("accessToken");
     setIsLoggedIn(false);
   };
 

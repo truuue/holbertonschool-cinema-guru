@@ -1,11 +1,11 @@
-import React from 'react';
-import './auth.css';
+import React from "react";
+import "./auth.css";
 
 const Register = ({ username, password, setUsername, setPassword }) => {
-  const handleSubmit = (e) => {
+  const handleSubmit = e => {
     e.preventDefault();
     // Logique d'inscription à implémenter
-    console.log('Tentative d'inscription avec:', username, password);
+    console.log(`Tentative d'inscription avec: ${username} ${password}`);
   };
 
   return (
@@ -14,15 +14,17 @@ const Register = ({ username, password, setUsername, setPassword }) => {
         type="text"
         placeholder="Choisir un nom d'utilisateur"
         value={username}
-        onChange={(e) => setUsername(e.target.value)}
+        onChange={e => setUsername(e.target.value)}
       />
       <input
         type="password"
         placeholder="Choisir un mot de passe"
         value={password}
-        onChange={(e) => setPassword(e.target.value)}
+        onChange={e => setPassword(e.target.value)}
       />
-      <button type="submit" className="auth-submit">S'inscrire</button>
+      <button type="submit" className="auth-submit">
+        S'inscrire
+      </button>
     </form>
   );
 };

@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from 'react';
-import './dashboard.css';
-import MovieCard from '../../components/MovieCard';
-import Filter from '../../components/Filter';
-import Button from '../../components/Button';
-import axios from 'axios';
+import React, { useState, useEffect } from "react";
+import "./dashboard.css";
+import MovieCard from "../../components/MovieCard";
+import Filter from "../../components/Filter";
+import Button from "../../components/Button";
+import axios from "axios";
 
 const HomePage = () => {
   const [movies, setMovies] = useState([]);
@@ -14,17 +14,17 @@ const HomePage = () => {
   const [title, setTitle] = useState("");
   const [page, setPage] = useState(1);
 
-  const loadMovies = async (pageNum) => {
+  const loadMovies = async pageNum => {
     try {
-      const response = await axios.get('/api/titles/advancedsearch', {
+      const response = await axios.get("/api/titles/advancedsearch", {
         params: {
           minYear,
           maxYear,
-          genres: genres.join(','),
+          genres: genres.join(","),
           title,
           sort,
-          page: pageNum
-        }
+          page: pageNum,
+        },
       });
       if (pageNum === 1) {
         setMovies(response.data);
@@ -47,7 +47,7 @@ const HomePage = () => {
 
   return (
     <div className="homepage">
-      <Filter 
+      <Filter
         minYear={minYear}
         maxYear={maxYear}
         genres={genres}

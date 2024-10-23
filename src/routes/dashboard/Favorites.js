@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
-import './dashboard.css';
-import MovieCard from '../../components/MovieCard';
-import axios from 'axios';
+import React, { useState, useEffect } from "react";
+import "./dashboard.css";
+import MovieCard from "../../components/MovieCard";
+import axios from "axios";
 
 const Favorites = () => {
   const [movies, setMovies] = useState([]);
@@ -9,7 +9,7 @@ const Favorites = () => {
   useEffect(() => {
     const fetchFavorites = async () => {
       try {
-        const response = await axios.get('/api/titles/favorite/');
+        const response = await axios.get("/api/titles/favorite/");
         setMovies(response.data);
       } catch (error) {
         console.error("Erreur lors du chargement des favoris:", error);

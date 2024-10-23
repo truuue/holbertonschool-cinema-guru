@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
-import './dashboard.css';
-import MovieCard from '../../components/MovieCard';
-import axios from 'axios';
+import React, { useState, useEffect } from "react";
+import "./dashboard.css";
+import MovieCard from "../../components/MovieCard";
+import axios from "axios";
 
 const WatchLater = () => {
   const [movies, setMovies] = useState([]);
@@ -9,7 +9,7 @@ const WatchLater = () => {
   useEffect(() => {
     const fetchWatchLater = async () => {
       try {
-        const response = await axios.get('/api/titles/watchlater/');
+        const response = await axios.get("/api/titles/watchlater/");
         setMovies(response.data);
       } catch (error) {
         console.error("Erreur lors du chargement de la liste 'À regarder plus tard':", error);

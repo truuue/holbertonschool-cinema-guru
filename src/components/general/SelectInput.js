@@ -1,8 +1,8 @@
-import React from 'react';
-import './general.css';
+import React from "react";
+import "./general.css";
 
 const SelectInput = ({ label, options, className, value, setValue }) => {
-  const handleSelect = (event) => {
+  const handleSelect = event => {
     setValue(event.target.value);
   };
 

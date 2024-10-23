@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import './movies.css';
+import React, { useState } from "react";
+import "./movies.css";
 
 const Tag = ({ genre, filter, genres, setGenres }) => {
   const [selected, setSelected] = useState(false);
@@ -14,11 +14,7 @@ const Tag = ({ genre, filter, genres, setGenres }) => {
     }
   };
 
-  return (
-    <li onClick={handleTag}>
-      {genre}
-    </li>
-  );
+  return <li onClick={handleTag}>{genre}</li>;
 };
 
 export default Tag;
