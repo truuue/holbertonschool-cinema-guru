@@ -2,11 +2,32 @@ import React, { useState } from 'react';
 import Login from './Login';
 import Register from './Register';
 import './auth.css';
+import axios from 'axios';
 
 const Authentication = ({ setIsLoggedIn, setUserUsername }) => {
   const [_switch, setSwitch] = useState(true);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    
+    try {
+      const route = _switch ? '/api/auth/login' : '/api/auth/register';
+      const response = await axios.post(route, { username, password });
+      
+      const { token } = response.data;
+      localStorage.setItem('token', token);
+      
+      setUserUsername(username);
+      setIsLoggedIn(true);
+      
+      // Vous pouvez ajouter ici une redirection ou un message de succès
+    } catch (error) {
+      console.error('Erreur d\'authentification:', error);
+      // Gérer l'erreur (par exemple, afficher un message à l'utilisateur)
+    }
+  };
 
   return (
     <div className="auth-container">
@@ -39,6 +60,9 @@ const Authentication = ({ setIsLoggedIn, setUserUsername }) => {
           setPassword={setPassword}
         />
       )}
+      <form onSubmit={handleSubmit}>
+        {/* ... */}
+      </form>
     </div>
   );
 };
