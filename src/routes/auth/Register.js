@@ -5,13 +5,8 @@ import { faUser, faLock } from '@fortawesome/free-solid-svg-icons';
 import './auth.css';
 
 function Register({ username, password, setUsername, setPassword }) {
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // La logique d'inscription sera ajoutée plus tard
-  };
-
   return (
-    <form className="auth-form" onSubmit={handleSubmit}>
+    <>
       <Input
         label="Username"
         type="text"
@@ -29,9 +24,9 @@ function Register({ username, password, setUsername, setPassword }) {
       <Button 
         label="Register"
         className="auth-submit"
-        onClick={handleSubmit}
+        type="submit"
       />
-    </form>
+    </>
   );
 }
 

@@ -5,13 +5,8 @@ import { faUser, faLock } from '@fortawesome/free-solid-svg-icons';
 import './auth.css';
 
 function Login({ username, password, setUsername, setPassword }) {
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // La logique de connexion sera ajoutée plus tard
-  };
-
   return (
-    <form className="auth-form" onSubmit={handleSubmit}>
+    <>
       <Input
         label="Username"
         type="text"
@@ -29,9 +24,9 @@ function Login({ username, password, setUsername, setPassword }) {
       <Button 
         label="Login"
         className="auth-submit"
-        onClick={handleSubmit}
+        type="submit"
       />
-    </form>
+    </>
   );
 }
 
