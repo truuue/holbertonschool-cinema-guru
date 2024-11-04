@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./dashboard.css";
-import MovieCard from "../../components/MovieCard";
+import MovieCard from "../../components/movies/MovieCard";
 import axios from "axios";
 
 const WatchLater = () => {
@@ -12,7 +12,7 @@ const WatchLater = () => {
         const response = await axios.get("/api/titles/watchlater/");
         setMovies(response.data);
       } catch (error) {
-        console.error("Erreur lors du chargement de la liste 'À regarder plus tard':", error);
+        console.error("Error fetching watch later list:", error);
       }
     };
 
@@ -20,11 +20,11 @@ const WatchLater = () => {
   }, []);
 
   return (
-    <div className="watch-later">
-      <h1>Films à regarder plus tard</h1>
-      <div className="movie-grid">
-        {movies.map(movie => (
-          <MovieCard key={movie.id} movie={movie} />
+    <div className="watch-later-page">
+      <h1>Films à voir plus tard</h1>
+      <div className="movies-grid">
+        {movies.map((movie, index) => (
+          <MovieCard key={index} movie={movie} />
         ))}
       </div>
     </div>

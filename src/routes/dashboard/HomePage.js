@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import "./dashboard.css";
-import MovieCard from "../../components/MovieCard";
-import Filter from "../../components/Filter";
-import Button from "../../components/Button";
+import MovieCard from "../../components/movies/MovieCard";
+import Filter from "../../components/movies/Filter";
+import Button from "../../components/general/Button";
 import axios from "axios";
 
 const HomePage = () => {
@@ -46,7 +46,7 @@ const HomePage = () => {
   };
 
   return (
-    <div className="homepage">
+    <div className="home-page">
       <Filter
         minYear={minYear}
         maxYear={maxYear}
@@ -59,12 +59,18 @@ const HomePage = () => {
         setSort={setSort}
         setTitle={setTitle}
       />
-      <div className="movie-grid">
-        {movies.map(movie => (
-          <MovieCard key={movie.id} movie={movie} />
+      <div className="movies-grid">
+        {movies.map((movie, index) => (
+          <MovieCard key={index} movie={movie} />
         ))}
       </div>
-      <Button onClick={handleLoadMore} text="Charger plus..." />
+      <div className="load-more">
+        <Button 
+          label="Charger plus..." 
+          onClick={handleLoadMore}
+          className="load-more-button"
+        />
+      </div>
     </div>
   );
 };

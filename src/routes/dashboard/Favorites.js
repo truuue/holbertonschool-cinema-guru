@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./dashboard.css";
-import MovieCard from "../../components/MovieCard";
+import MovieCard from "../../components/movies/MovieCard";
 import axios from "axios";
 
 const Favorites = () => {
@@ -12,7 +12,7 @@ const Favorites = () => {
         const response = await axios.get("/api/titles/favorite/");
         setMovies(response.data);
       } catch (error) {
-        console.error("Erreur lors du chargement des favoris:", error);
+        console.error("Error fetching favorites:", error);
       }
     };
 
@@ -20,11 +20,11 @@ const Favorites = () => {
   }, []);
 
   return (
-    <div className="favorites">
+    <div className="favorites-page">
       <h1>Films que vous aimez</h1>
-      <div className="movie-grid">
-        {movies.map(movie => (
-          <MovieCard key={movie.id} movie={movie} />
+      <div className="movies-grid">
+        {movies.map((movie, index) => (
+          <MovieCard key={index} movie={movie} />
         ))}
       </div>
     </div>
