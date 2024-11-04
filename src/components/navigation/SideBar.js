@@ -1,24 +1,41 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faHome, faStar, faClock, faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
 import Activity from "../Activity";
 import "./navigation.css";
 
 const SideBar = () => {
-  const [small, setSmall] = useState(false);
+  const [selected, setSelected] = useState("home");
+  const [small, setSmall] = useState(true);
   const [activities, setActivities] = useState([]);
   const [showActivities, setShowActivities] = useState(false);
   const navigate = useNavigate();
 
-  const setPage = pageName => {
+  useEffect(() => {
+    const fetchActivities = async () => {
+      try {
+        const response = await axios.get("/api/activity");
+        setActivities(response.data);
+      } catch (error) {
+        console.error("Error fetching activities:", error);
+      }
+    };
+
+    fetchActivities();
+  }, []);
+
+  const setPage = (pageName) => {
+    setSelected(pageName);
     switch (pageName) {
-      case "Home":
+      case "home":
         navigate("/home");
         break;
-      case "Favorites":
+      case "favorites":
         navigate("/favorites");
         break;
-      case "Watch Later":
+      case "watchlater":
         navigate("/watchlater");
         break;
       default:
@@ -26,44 +43,58 @@ const SideBar = () => {
     }
   };
 
-  useEffect(() => {
-    axios
-      .get("/api/activity")
-      .then(response => {
-        setActivities(response.data);
-      })
-      .catch(error => {
-        console.error("Erreur lors de la récupération des activités:", error);
-      });
-  }, []);
-
   return (
     <nav className={`sidebar ${small ? "small" : ""}`}>
-      <ul className="navigation">
-        <li onClick={() => setPage("Home")}>
-          <i className="icon-home"></i>
-          {!small && <span>Accueil</span>}
+      <ul className="nav-list">
+        <li 
+          className={`nav-item ${selected === "home" ? "selected" : ""}`}
+          onClick={() => setPage("home")}
+        >
+          <FontAwesomeIcon icon={faHome} className="nav-icon" />
+          {!small && "Accueil"}
         </li>
-        <li onClick={() => setPage("Favorites")}>
-          <i className="icon-star"></i>
-          {!small && <span>Favoris</span>}
+        <li 
+          className={`nav-item ${selected === "favorites" ? "selected" : ""}`}
+          onClick={() => setPage("favorites")}
+        >
+          <FontAwesomeIcon icon={faStar} className="nav-icon" />
+          {!small && "Favoris"}
         </li>
-        <li onClick={() => setPage("Watch Later")}>
-          <i className="icon-clock"></i>
-          {!small && <span>À regarder plus tard</span>}
+        <li 
+          className={`nav-item ${selected === "watchlater" ? "selected" : ""}`}
+          onClick={() => setPage("watchlater")}
+        >
+          <FontAwesomeIcon icon={faClock} className="nav-icon" />
+          {!small && "À voir plus tard"}
         </li>
       </ul>
-      <button onClick={() => setShowActivities(!showActivities)}>
-        {showActivities ? "Masquer les activités" : "Afficher les activités"}
-      </button>
-      {showActivities && (
-        <ul className="activities">
-          {activities.slice(0, 10).map((activity, index) => (
-            <Activity key={index} activity={activity} />
-          ))}
-        </ul>
+
+      {!small && (
+        <div className="activities-section">
+          <div className="activities-header">
+            <h3>Activités récentes</h3>
+            <FontAwesomeIcon 
+              icon={showActivities ? faChevronDown : faChevronRight}
+              onClick={() => setShowActivities(!showActivities)}
+              style={{ cursor: "pointer" }}
+            />
+          </div>
+          {showActivities && (
+            <ul className="activities-list">
+              {activities.slice(0, 10).map((activity, index) => (
+                <Activity key={index} activity={activity} />
+              ))}
+            </ul>
+          )}
+        </div>
       )}
-      <button onClick={() => setSmall(!small)}>{small ? "Agrandir" : "Réduire"}</button>
+
+      <div 
+        className="sidebar-toggle"
+        onClick={() => setSmall(!small)}
+      >
+        <FontAwesomeIcon icon={small ? faChevronRight : faChevronLeft} />
+      </div>
     </nav>
   );
 };

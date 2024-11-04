@@ -1,35 +1,25 @@
-import React from "react";
-import "./components.css";
+import React from 'react';
+import './components.css';
 
-const Activity = ({ activity }) => {
-  const formatActivityText = activity => {
-    const { user, action, target } = activity;
-
-    // Formatage du texte de l'activité
-    let formattedText = `${user} a `;
-
-    switch (action) {
-      case "like":
-        formattedText += `aimé ${target}`;
-        break;
-      case "comment":
-        formattedText += `commenté sur ${target}`;
-        break;
-      case "share":
-        formattedText += `partagé ${target}`;
-        break;
+function Activity({ activity }) {
+  const formatActivity = () => {
+    switch (activity.type) {
+      case 'FAVORITE':
+        return `a ajouté ${activity.movie.title} à ses favoris`;
+      case 'WATCHLATER':
+        return `a ajouté ${activity.movie.title} à sa liste "À voir plus tard"`;
+      case 'RATING':
+        return `a noté ${activity.movie.title} ${activity.value} étoiles`;
       default:
-        formattedText += `${action} ${target}`;
+        return `a interagi avec ${activity.movie.title}`;
     }
-
-    return formattedText;
   };
 
   return (
     <li className="activity-item">
-      <p className="activity-text">{formatActivityText(activity)}</p>
+      <p>{activity.username} {formatActivity()}</p>
     </li>
   );
-};
+}
 
 export default Activity;
