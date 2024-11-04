@@ -1,5 +1,7 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
+import Authentication from './routes/auth/Authentication';
+import Dashboard from './routes/dashboard/Dashboard';
 import './App.css';
 
 function App() {
@@ -30,9 +32,15 @@ function App() {
   return (
     <div className="App">
       {isLoggedIn ? (
-        <div>Dashboard Component à venir</div>
+        <Dashboard 
+          userUsername={userUsername}
+          setIsLoggedIn={setIsLoggedIn}
+        />
       ) : (
-        <div>Authentication Component à venir</div>
+        <Authentication 
+          setIsLoggedIn={setIsLoggedIn}
+          setUserUsername={setUserUsername}
+        />
       )}
     </div>
   );

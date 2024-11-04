@@ -1,27 +1,18 @@
-import React from "react";
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
-import SideBar from "../../components/navigation/SideBar";
-import "./Dashboard.css";
-import HomePage from "../../pages/HomePage";
-import Favorites from "../../pages/Favorites";
-import WatchLater from "../../pages/WatchLater";
+import React from 'react';
+import Header from '../../components/navigation/Header';
+import './dashboard.css';
 
-function Dashboard() {
+function Dashboard({ userUsername, setIsLoggedIn }) {
   return (
-    <BrowserRouter>
-      <div className="dashboard">
-        <SideBar />
-        <main className="dashboard-content">
-          {/* Contenu principal du tableau de bord */}
-          <Routes>
-            <Route path="/home" element={<HomePage />} />
-            <Route path="/favorites" element={<Favorites />} />
-            <Route path="/watchlater" element={<WatchLater />} />
-            <Route path="*" element={<Navigate to="/home" replace />} />
-          </Routes>
-        </main>
+    <div className="dashboard">
+      <Header 
+        userUsername={userUsername}
+        setIsLoggedIn={setIsLoggedIn}
+      />
+      <div className="dashboard-content">
+        {/* Le contenu du dashboard sera ajouté ici dans les prochaines tâches */}
       </div>
-    </BrowserRouter>
+    </div>
   );
 }
 
