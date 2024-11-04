@@ -1,58 +1,38 @@
-import React, { useState } from "react";
-import "./auth.css";
+import React from 'react';
+import Input from '../../components/general/Input';
+import Button from '../../components/general/Button';
+import { faUser, faLock } from '@fortawesome/free-solid-svg-icons';
+import './auth.css';
 
-const Login = () => {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
-
-  const handleSubmit = async e => {
+function Login({ username, password, setUsername, setPassword }) {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    setError("");
-
-    try {
-      const response = await fetch("/api/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ username, password }),
-      });
-
-      if (response.ok) {
-        const data = await response.json();
-        console.log("Connexion réussie:", data);
-        // Rediriger l'utilisateur ou mettre à jour l'état de l'application
-      } else {
-        const errorData = await response.json();
-        setError(errorData.message || "Erreur de connexion");
-      }
-    } catch (error) {
-      console.error("Erreur lors de la connexion:", error);
-      setError("Une erreur s'est produite. Veuillez réessayer.");
-    }
+    // La logique de connexion sera ajoutée plus tard
   };
 
   return (
     <form className="auth-form" onSubmit={handleSubmit}>
-      {error && <div className="auth-error">{error}</div>}
-      <input
+      <Input
+        label="Username"
         type="text"
-        placeholder="Nom d'utilisateur"
         value={username}
-        onChange={e => setUsername(e.target.value)}
+        setValue={setUsername}
+        icon={faUser}
       />
-      <input
+      <Input
+        label="Password"
         type="password"
-        placeholder="Mot de passe"
         value={password}
-        onChange={e => setPassword(e.target.value)}
+        setValue={setPassword}
+        icon={faLock}
       />
-      <button type="submit" className="auth-submit">
-        Se connecter
-      </button>
+      <Button 
+        label="Login"
+        className="auth-submit"
+        onClick={handleSubmit}
+      />
     </form>
   );
-};
+}
 
 export default Login;

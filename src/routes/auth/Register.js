@@ -1,60 +1,38 @@
-import React, { useState } from "react";
-import "./auth.css";
+import React from 'react';
+import Input from '../../components/general/Input';
+import Button from '../../components/general/Button';
+import { faUser, faLock } from '@fortawesome/free-solid-svg-icons';
+import './auth.css';
 
-const Register = () => {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
-
-  const handleSubmit = async e => {
+function Register({ username, password, setUsername, setPassword }) {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    setError("");
-
-    if (!username || !password) {
-      setError("Veuillez remplir tous les champs");
-      return;
-    }
-
-    try {
-      const response = await fetch("/api/register", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ username, password }),
-      });
-
-      if (response.ok) {
-        console.log("Inscription réussie !");
-      } else {
-        const data = await response.json();
-        setError(data.message || "Erreur lors de l'inscription");
-      }
-    } catch (error) {
-      setError("Erreur de connexion au serveur");
-    }
+    // La logique d'inscription sera ajoutée plus tard
   };
 
   return (
     <form className="auth-form" onSubmit={handleSubmit}>
-      {error && <p className="error-message">{error}</p>}
-      <input
+      <Input
+        label="Username"
         type="text"
-        placeholder="Choisir un nom d'utilisateur"
         value={username}
-        onChange={e => setUsername(e.target.value)}
+        setValue={setUsername}
+        icon={faUser}
       />
-      <input
+      <Input
+        label="Password"
         type="password"
-        placeholder="Choisir un mot de passe"
         value={password}
-        onChange={e => setPassword(e.target.value)}
+        setValue={setPassword}
+        icon={faLock}
       />
-      <button type="submit" className="auth-submit">
-        S'inscrire
-      </button>
+      <Button 
+        label="Register"
+        className="auth-submit"
+        onClick={handleSubmit}
+      />
     </form>
   );
-};
+}
 
 export default Register;
