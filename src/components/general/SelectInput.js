@@ -7,9 +7,13 @@ const SelectInput = ({ label, options, className, value, setValue }) => {
   };
 
   return (
-    <div className={`select-container ${className}`}>
+    <div className="select-container">
       {label && <label>{label}</label>}
-      <select value={value} onChange={handleSelect}>
+      <select 
+        className={`select ${className || ''}`}
+        value={value}
+        onChange={handleSelect}
+      >
         {options.map((option, index) => (
           <option key={index} value={option.value}>
             {option.label}
