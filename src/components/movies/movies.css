@@ -1,1 +1,80 @@
 /* Ce fichier contiendra tous les styles CSS nécessaires pour les composants de films */
+
+/* Tag styles */
+.tag {
+  display: inline-block;
+  padding: 5px 10px;
+  margin: 5px;
+  border-radius: 15px;
+  cursor: pointer;
+  transition: all 0.3s;
+  background-color: #f0f0f0;
+}
+
+.tag.selected {
+  background-color: #007bff;
+  color: white;
+}
+
+/* Filter styles */
+.filter-container {
+  padding: 20px;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  margin-bottom: 20px;
+}
+
+.filter-section {
+  margin-bottom: 15px;
+}
+
+.tags-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+
+/* MovieCard styles */
+.movie-card {
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  padding: 15px;
+  margin-bottom: 15px;
+  position: relative;
+}
+
+.movie-actions {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  display: flex;
+  gap: 10px;
+}
+
+.movie-action-icon {
+  cursor: pointer;
+  transition: color 0.3s;
+}
+
+.movie-action-icon.active {
+  color: #007bff;
+}
+
+.movie-title {
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+}
+
+.movie-synopsis {
+  font-size: 0.9rem;
+  color: #666;
+  margin-bottom: 10px;
+}
+
+.movie-genres {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}

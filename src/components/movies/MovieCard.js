@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./movies.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHeart, faClock } from "@fortawesome/free-solid-svg-icons";
+import { faStar, faClock } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
 
 const MovieCard = ({ movie }) => {
@@ -26,47 +26,46 @@ const MovieCard = ({ movie }) => {
 
   const handleClick = async type => {
     try {
-      if (type === "favorite") {
-        if (isFavorite) {
-          await axios.delete(`/api/titles/favorite/${movie.imdbId}`);
-          setIsFavorite(false);
-        } else {
-          await axios.post(`/api/titles/favorite/${movie.imdbId}`);
-          setIsFavorite(true);
-        }
-      } else if (type === "watchlater") {
-        if (isWatchLater) {
-          await axios.delete(`/api/titles/watchlater/${movie.imdbId}`);
-          setIsWatchLater(false);
-        } else {
-          await axios.post(`/api/titles/watchlater/${movie.imdbId}`);
-          setIsWatchLater(true);
-        }
+      const isCurrentlySelected = type === 'favorite' ? isFavorite : isWatchLater;
+      const method = isCurrentlySelected ? 'delete' : 'post';
+      
+      await axios[method](`/api/titles/${type}/${movie.imdbId}`);
+      
+      if (type === 'favorite') {
+        setIsFavorite(!isFavorite);
+      } else {
+        setIsWatchLater(!isWatchLater);
       }
     } catch (error) {
-      console.error(`Erreur lors de la mise à jour de ${type}:`, error);
+      console.error('Error updating movie list:', error);
     }
   };
 
   return (
-    <li>
-      <FontAwesomeIcon
-        icon={faHeart}
-        onClick={() => handleClick("favorite")}
-        color={isFavorite ? "red" : "gray"}
-      />
-      <FontAwesomeIcon
-        icon={faClock}
-        onClick={() => handleClick("watchlater")}
-        color={isWatchLater ? "blue" : "gray"}
-      />
-      <h3>{movie.title}</h3>
-      <p>{movie.synopsis}</p>
-      <ul>
-        {movie.genres.map(genre => (
-          <li key={genre}>{genre}</li>
+    <li className="movie-card">
+      <div className="movie-actions">
+        <FontAwesomeIcon
+          icon={faStar}
+          className={`movie-action-icon ${isFavorite ? 'active' : ''}`}
+          onClick={() => handleClick('favorite')}
+        />
+        <FontAwesomeIcon
+          icon={faClock}
+          className={`movie-action-icon ${isWatchLater ? 'active' : ''}`}
+          onClick={() => handleClick('watchlater')}
+        />
+      </div>
+      
+      <h3 className="movie-title">{movie.title}</h3>
+      <p className="movie-synopsis">{movie.synopsis}</p>
+      
+      <div className="movie-genres">
+        {movie.genres.map((genre, index) => (
+          <span key={index} className="tag">
+            {genre}
+          </span>
         ))}
-      </ul>
+      </div>
     </li>
   );
 };
